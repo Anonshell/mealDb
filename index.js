@@ -53,56 +53,27 @@ const searchMeals = () => {
   loadMeals(searchText);
 };
 
-
-
-
-
-
-
-
-
 const loadMealDetail = (idMeal) => {
+  const url = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${idMeal}`;
 
-  const url =`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${idMeal}`
-  
-
-     fetch(url)
-     .then(res => res.json())
-      .then(data=> displayMealDetails(data.meals[0]) )
-
-
-
+  fetch(url)
+    .then((res) => res.json())
+    .then((data) => displayMealDetails(data.meals[0]));
 };
 
+const displayMealDetails = (meal) => {
+  document.getElementById("mealDetailsLabel").innerText = meal.strMeal;
 
+  const mealDetails = document.getElementById("mealDetailsBody");
 
-const displayMealDetails = meal =>{
-
-
-
-  document.getElementById('mealDetailsLabel').innerText= meal.strMeal;
-
-    const mealDetails  = document.getElementById('mealDetailsBody');
-
-    mealDetails.innerHTML = 
-    `
+  mealDetails.innerHTML = `
     
     
-    <img class="img-fluid" src="${meal.strMealThumb}"    >
+    <img class="img-fluid" src="${meal.strMealThumb}" >
     
     
     
-    
-    
-    
-    
-    `
-
-
-}
-
-
-
-
+    `;
+};
 
 loadMeals("fish");
